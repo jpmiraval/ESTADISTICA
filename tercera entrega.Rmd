@@ -90,7 +90,6 @@ abline(v=mean(na.omit(titulo)), col="blue",lwd=5)
 legend("topright", 0, legend=c("Mediana", "Media"),lwd=2,col=c("red","blue"))
 ```
 
-GAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 Mediana:
 ```{r echo = FALSE}
