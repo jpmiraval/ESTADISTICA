@@ -1,0 +1,287 @@
+---
+title: "Impacto del consumo de videojuegos de universitarios en su desempeÃ±o acadÃ©mico."
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Sección: 4 / Profesora: Brigida Molina Carabaño
+
+#Integrantes:
+
+-Juan Felix Elías García (Líder)
+
+-Jairo David Narro Silva 
+
+-Jean Paul Miraval Obregón
+
+-Jorge Luis Acosta Romero
+
+-Paolo Facundo Alatrista Amaya
+
+#Segunda Entrega:
+##Introducción
+Jugar videojuegos se ha visto desde la opinión pública como una actividad meramente de entretenimiento y el invertir tiempo en estas actividades paralelamente a los estudios es vista de mala manera por la sociedad, asumiendo que esto trae consecuencias negativas y afecta directamente al desempeño académico; sin embargo,  este juicio es realizado en la mayoría de casos sin sustento alguno. 
+Este estudio tiene como objetivo y según el análisis que se realice, obtener ese sustento; o en caso de que el análisis demuestre que es incorrecto, desmentir esta creencia. 
+Los datos recolectados para este estudio fueron obtenidos a través de una encuesta enviada a una página de facebook relacionada con los videojuegos.
+
+
+##Población objetivo
+Estudiantes universitarios limeños que consumen videojuegos.
+
+##Población muestra 
+Estudiantes universitarios limeños pertenecientes a la comunidad gamer que respondieron la encuesta.
+
+##Tipo de muestreo
+El tipo de muestreo realizado fue un muestreo estratificado, donde los grupos heterogéneos son las universidades y los miembros con características en común son los estudiantes gamers.
+
+##Audiencia de interés
+La audiencia de interés de este estudio son principalmente los estudiantes universitarios peruanos que pertenecen a la comunidad gamer ya que se dice que son estos los que tienen menor rendimiento académico, por otro lado, están los alumnos que no se dedican al consumo de videojuegos pero que al escuchar sobre los prejuicios existentes de esto tienen la curiosidad de saber si son reales o simplemente mitos.
+
+##Preguntas de la encuesta
+1. ¿Que edad tienes?
+2. ¿A qué universidad perteneces?
+3. ¿Qué carrera estás estudiando?
+4. ¿A qué sexo perteneces?
+5. ¿A qué rubro de la industria de los videojuegos le dedicas tiempo? 
+6. ¿Sientes que te ha afectado alguna vez académicamente el jugar videojuegos?
+7. ¿Has faltado a clases alguna vez por jugar videojuegos?
+8. ¿Has dejado de cumplir con tus tareas para dedicar ese tiempo al consumo de videojuegos?
+9. ¿Cuantas horas semanalmente consumes videojuegos?
+10. ¿Cual es tu promedio en ciencias?
+11. ¿Cual es tu promedio en letras?
+12. ¿Cual es tu promedio en humanidades?
+
+VARIABLES                                                  TIPOS DE VARIABLES                   RELAIÓN CON PREGUNTA  
+---------------------------------------------------        -------------------------          -----------------------
+Edad                                                       Cuantitativa Discreta                   1                  
+Universidad                                                Cualitativa Nominal                     2                  
+Carrera                                                    Cualitativa Nominal                     3                  
+Sexo                                                       Cualitativa Nominal                     4                  
+Tipo de consumo                                            Cualitativa Nominal                     5                  
+Horas de consumo semanales                                 Cuantitativa Continua                   9                  
+Promedio en el área de ciencias                            Cualitativa Ordinal                     10                 
+Promedio en el área de letras                              Cualitativa Ordinal                     11                 
+Promedio en el área de humanidades                         Cualitativa Ordinal                     12                 
+Influencia negativa en las calificaciones                  Cualitativa Nominal                     6                  
+Influencia negativa en la asistencia a clases              Cualitativa Nominal                     7                  
+Influencia negativa en la productividad                    Cualitativa Nominal                     8                  
+                                              
+
+
+#Preguntas Descriptivas:
+1. **¿Cuál es moda, mediana y media de la edad de los encuestados?**
+
+La edad de los encuestados se distribuye de la siguiente forma: 
+
+Media:
+
+```{r echo=FALSE}
+DF<-read.csv(file ="data.csv",header=T,sep = ",")
+Media<-round(mean(DF$Edad), 2)
+Media
+```
+Mediana:
+```{r echo = FALSE}
+Mediana<-round(median(DF$Edad), 2)
+Mediana
+```
+Moda:
+```{r echo = FALSE}
+tabla<-table(DF$Edad)
+maximo<-max(tabla)
+tabla[which(tabla == maximo)]
+```
+Donde la moda es 18 años, con 56 repeticiones de este valor para la variable edad.
+
+2. **¿Cuáles son las 3 universidades con más frecuencia de aparición a las que pertenecen los encuestados?**
+```{r echo = FALSE}
+indices<-table(DF$Universidad)
+indices[which(indices>8)]
+```
+La universidad con mayores integrantes es la UTEC, seguido por la PUCP y la USMP. La UTP y la UNI completan la lista.
+
+3. **¿Cuál es el porcentaje de aprobados y desaprobados en cada área de estudio en el que se desenvuelven los encuestados? **
+
+El porcentaje de desaprobados de matemática es:
+```{r echo = FALSE}
+encuestados<-105
+daprob_mate<-length(DF$Matematica[which(DF$Matematica<11)])
+round(daprob_mate*100/encuestados, 2)
+```
+El de aprobados será:
+```{r echo = FALSE}
+encuestados<-105
+aprob_mate<-length(DF$Matematica[which(!DF$Matematica<11)])
+round(aprob_mate*100/encuestados, 2)
+```
+
+En cuanto al área de letras, los desaprobados representan un porcentaje del:
+```{r echo = FALSE}
+encuestados<-157
+daprob_letras<-length(DF$Letras[which(DF$Letras<11)])
+round(daprob_letras*100/encuestados, 2)
+```
+y los aprobados de Letras:
+```{r echo = FALSE}
+aprob_letras<-length(DF$Letras[which(!DF$Letras<11)])
+round(aprob_letras*100/encuestados, 2)
+```
+
+Finalmente, en el área de Humanidades tenemos:
+
+```{r echo = FALSE}
+daprob_hum<-length(DF$Humaidades[which(DF$Humaidades<11)])
+round(daprob_hum*100/encuestados, 2)
+```
+de desaprobados.
+```{r echo = FALSE}
+aprob_hum<-length(DF$Humaidades[which(!DF$Humaidades<11)])
+round(aprob_hum*100/encuestados, 2)
+```
+
+4. **¿Cual es el porcentaje de los encuestados que se considera "gamer"?**
+Entre todos los encuestados, se consideran "gamers" un:
+```{r echo==FALSE}
+gamers<-length(which(!DF$Juega == "No"))
+round(gamers*100/encuestados, 2)
+```
+porciento.
+
+5. **¿Cuántas horas a la semana en promedio le dedican a los videojuegos los encuestados?**
+
+La media de las horas semanales jugadas por los encuestados es de:
+```{r echo=FALSE}
+lista_horas<-DF$Horas
+round(mean(na.omit(lista_horas)),2)
+```
+La mediana de las horas semanales jugadas por los encuestados es de:
+```{r echo=FALSE}
+lista_horas<-DF$Horas
+round(median(na.omit(lista_horas)),2)
+```
+La moda de las horas semanales jugadas por los ecuestados es de:
+```{r echo=FALSE}
+tabla<-table(na.omit(DF$Horas))
+maximo<-max(tabla)
+tabla[which(tabla == maximo)]
+```
+Tras esto, la moda es de 14 horas semanales.
+
+5. **¿Qué porcentaje de los encuestados ha  faltado a clases alguna vez por jugar videojuegos?**
+El porcentaje de encuestados que ha faltado a clases por jugar videojuegos de de:
+```{r echo = FALSE}
+han_faltado<-length(which(!DF$Falta=="No"))
+round(han_faltado*100/encuestados, 2)
+```
+
+6. **¿Qué porcentaje de los encuestados siente que su rendimiento académico ha sido afectado por jugar videojuegos?**
+El porcentaje de encuestados que siente que su rendimiento académico ha sido afectado por jugar videojuegos es de:
+```{r echo = FALSE}
+han_faltado<-length(which(!DF$Afectado=="No"))
+round(han_faltado*100/encuestados, 2)
+```
+7. **¿Qué porcentaje de los encuestados ha dejado de cumplir con tareas por motivo de jugar videojuegos?**
+El porcentaje de encuestados que ha dejado de cumplir con tareas por motivo de jugar videojuegos es de:
+```{r echo = FALSE}
+han_faltado<-length(which(!DF$Tareas=="No"))
+round(han_faltado*100/encuestados, 2)
+```
+
+#Preguntas Exploratorias:
+1. **¿Afecta en el rendimiento académico de los estudiantes el jugar videojuegos?**
+De los resultados recogidos en la encuesta, podemos obtener estas tres cifras interesantes:
+
+Considerando como "jugadores constantes" a los que poseen un total de horas jugadas mayor o igual a 14.
+
+1.-
+```{r echo = FALSE}
+desaprobados_constantes<-length(which(DF$Matematica<11 & DF$Horas>=14))
+desaprobados_total<-length(which(DF$Matematica<11))
+round(desaprobados_constantes*100/desaprobados_total, 2)
+```
+por ciento de los desaprobados en Ciencias son jugadores constantes.
+
+2.-
+```{r echo = FALSE}
+desaprobados_constantes<-length(which(DF$Letras<11 & DF$Horas>=14))
+desaprobados_total<-length(which(DF$Letras<11))
+round(desaprobados_constantes*100/desaprobados_total, 2)
+```
+por ciento de los desaprobados en Letras son jugadores constantes.
+
+3.-
+```{r echo = FALSE}
+desaprobados_constantes<-length(which(DF$Humaidades<11 & DF$Horas>=14))
+desaprobados_total<-length(which(DF$Humaidades<11))
+round(desaprobados_constantes*100/desaprobados_total, 2)
+```
+por ciento de los desaprobados en Humanidades son jugadores constantes.
+
+Podemos darnos cuenta que los jugadores constantes representan un porcentaje importante dentro de los alumnos desaprobados. Sin embargo, concluir que los videojuegos tienen un impacto negativo directo en los resultados académicos sería generalizar erróneamente, puesto que debemos analizar qué porcentaje entre los jugadores constantes representan los desaprobados:
+
+1.-
+```{r echo = FALSE}
+desaprobados_constantes<-length(which(DF$Matematica<11 & DF$Horas>=14))
+jugadores_constantes<-length(which(DF$Horas>=14))
+round(desaprobados_constantes*100/jugadores_constantes, 2)
+```
+por ciento de los jugadores constantes, cuentan con notas desaprobatorias dentro del área de matemáticas.
+
+2.-
+```{r echo = FALSE}
+desaprobados_constantes<-length(which(DF$Letras<11 & DF$Horas>=14))
+jugadores_constantes<-length(which(DF$Horas>=14))
+round(desaprobados_constantes*100/jugadores_constantes, 2)
+```
+por ciento de los jugadores constantes, cuentan con notas desaprobatorias dentro del área de Letras.
+
+3.-
+```{r echo = FALSE}
+desaprobados_constantes<-length(which(DF$Humaidades<11 & DF$Horas>=14))
+jugadores_constantes<-length(which(DF$Horas>=14))
+round(desaprobados_constantes*100/jugadores_constantes, 2)
+```
+por ciento de los jugadores constantes, cuentan con notas desaprobatorias dentro del área de Humanidades.
+
+Considerando tanto la primera serie de cifras como la segunda, podemos tener un indicio de respuestas para esta pregunta. Una explicación sería que si bien es cierto, el uso constante de videojuegos es algo relativamente común entre los desaprobados, este no causa directamente malos resultados académicos, lo cual concluimos después de analizar los segundos porcentajes. Los altos porcentajes de jugadores constantes dentro de los desaprobados puede representar a los estudiantes que no distribuyen conscientemente su tiempo de estudio, por eso el porcentaje de desaprobados del total de jugadores constantes en el área de ciencias (normalmente el área que más tiempo de estudio/práctica requiere) es mayor que en las demás áreas.
+
+2. **¿Existe una relación entre la carrera que estudian los encuestados y el tiempo dedicado a los videojuegos?**
+```{r}
+table(DF[which(DF$Horas>=14),]$Area)
+porcentaje_ingtec<-round(30*100/jugadores_constantes, 2)
+porcentaje_ingtec
+```
+De la tabla generada podemos apreciar que un 51% de los jugadores constantes estudian carreras que pertenecen al área de ingeniería y tecnología. Con estoo podríamos concluir que los estudiantes de esta carrera tienden a jugar videojuegos en mayor medida que el resto.  Sin embargo, y tal cual lo hicimos en la pregunta anterior, debemos averiguar si esta cifra realmente significa esto. Si analizamos qué porcentaje de todos los estudiantes de esta área representan estos 30 casos, verificaremos si lo enterior es cierto.
+```{r echo=FALSE}
+table(DF$Area)
+
+```
+como vemos en al tabla de arriba, 93 encuestados pertenecen al área de ingeniería y tecnología, por lo que el número presentado arriba significa un:
+```{r echo=FALSE}
+round(30*100/93, 2)
+```
+y si bien es cierto esta cifra parece ser alta, es baja en comparación a otras áreas, por ejemplo en el área de contables se llega hasta un 50%, y en el área de letras un 88.89%. Alguna conclusión interesante que podemos sacar de estas informaciones es el hecho de que más del 30% de los alumnos de las áreas con representación significativa en la encuesta han resultado ser jugadores costantes, sin embargo, consideramos que los datos que se tienen de las áreas ajenas a la ingeniería son muy pocos para determinar una conclusión acertada.
+
+3. **¿Existe una relación entre la edad de los encuestados y el tiempo que le dedican al consumo de videojuegos?**
+De nuevo podemos generar una tabla para observar estos resultados:
+```{r echo = FALSE}
+table(DF[which(DF$Horas>=14),]$Edad)
+```
+Podemos apreciar que la mayor parte de los jugadores constantes se concentran con una gran diferencia entre los chicos de 18 a 19 años, ya que en ese intervalo de edad podemos encontrar a un
+```{r echo=FALSE}
+constantes_intervalo<-12+8+10
+round(constantes_intervalo*100/jugadores_constantes, 2)
+```
+por ciento de todos los jugadores constantes. Esto indica que los jugadores constantes universitarios tienden a tener entre 18 a 20 años de edad.
+
+Analizando este rango de edad entre los encuestados también podemos decir que un
+```{r echo = FALSE}
+
+round(constantes_intervalo*100/length(which(DF$Edad>17 & DF$Edad<21 )))
+```
+32% de los integrantes de este intervalo de edad son jugadores constantes, lo que constituye un porcentaje significativo que nos indica que efectivamente los estudiantes dentro del rango de edad entre 18 y 20 años tienden a ser jugadores constantes de videojuegos.
+
+
+3. **¿Existe una relación entre las horas en las que los encuestados dedican a los videojuegos y sus notas académicas?**
+
